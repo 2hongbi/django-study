@@ -74,6 +74,10 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 DEFAULT_FILE_STORAGE = 'config.asset_storage.MediaStorage'
 
+# IAMPORT API
+IAMPORT_KEY = get_secret("IAMPORT_KEY")
+IAMPORT_SECRET = get_secret("IAMPORT_SECRET")
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -98,6 +102,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.naver',
     'cart',
     'coupon',
+    'order',
 ]
 
 MIDDLEWARE = [
