@@ -43,7 +43,7 @@ class OrderItem(models.Model):
     def get_item_price(self):
         return self.price * self.quantity
 
-import hashlib
+import hashlib  # MD5, SHA256 등의 알고리즘으로 문자열을 해싱할 때 사용하는 모듈
 from .iamport import payments_prepare, find_transaction
 class OrderTransactionManager(models.Manager):
     def create_new(self,order,amount,success=None,transaction_status=None):
@@ -82,14 +82,14 @@ class OrderTransactionManager(models.Manager):
             return None
 
 
-class OrderTransaction(models.Model):
+class OrderTransaction(models.Model):   # 결제 정보 저장 시 사용
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     merchant_order_id = models.CharField(max_length=120, null=True, blank=True)
-    transaction_id = models.CharField(max_length=120, null=True,blank=True)
+    transaction_id = models.CharField(max_length=120, null=True, blank=True)   # 정산 문제 시 확인 및 환불 정보에 필요
     amount = models.PositiveIntegerField(default=0)
-    transaction_status = models.CharField(max_length=220, null=True,blank=True)
-    type = models.CharField(max_length=120,blank=True)
-    created = models.DateTimeField(auto_now_add=True,auto_now=False)
+    transaction_status = models.CharField(max_length=220, null=True, blank=True)
+    type = models.CharField(max_length=120, blank=True)
+    created = models.DateTimeField(auto_now_add=True, auto_now=False)
 
     objects = OrderTransactionManager()
 

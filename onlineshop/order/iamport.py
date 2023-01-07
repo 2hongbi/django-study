@@ -14,7 +14,7 @@ def get_token():    # 아임포트 서버와 통신하기 위한 토큰 받아�
     req = requests.post(url, data=access_data)
     access_res = req.json()
 
-    if access_res['code'] is 0:
+    if access_res['code'] == 0:
         return access_res['response']['access_token']
     else:
         return None
@@ -35,7 +35,7 @@ def payments_prepare(order_id, amount, *args, **kwargs):  # 결제 준비 함수
         req = requests.post(url, data=access_data, headers=headers)
         res = req.json()
 
-        if res['code'] is not 0:
+        if res['code'] != 0:
             raise ValueError("API 통신 오류")
     else:
         raise ValueError("토큰 오류")
@@ -53,7 +53,7 @@ def find_transaction(order_id, *args, **kwargs):    # 실제 결제가 이뤄진
         req = requests.post(url, headers=headers)
         res = req.json()
 
-        if res['code'] is not 0:
+        if res['code'] != 0:
             context = {
                 'imp_id': res['response']['imp_uid'],
                 'merchant_order_id': res['response']['merchant_uid'],
