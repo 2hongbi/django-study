@@ -4,6 +4,11 @@ from django.views.decorators.csrf import csrf_exempt
 from .forms import TodoForm
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
+from django.shortcuts import render
+
+
+def index(request):
+    return render(request, 'todo/list.html')
 
 
 def todo_fetch(request):

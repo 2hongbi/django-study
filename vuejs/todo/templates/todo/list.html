@@ -2,18 +2,18 @@
 
 {% block content %}
 <section class="main" v-show="todos.length" v-cloak>
-    <input show="toggle-all" type="checkbox" v-model="allDone">
+    <input class="toggle-all" type="checkbox" v-model="allDone">
     <ul class="todo-list">
         <li v-for="todo in filteredTodos"
             class="todo"
             :key="todo.id"
             :class="{ completed: todo.completed, editing: todo == editedTodo }">
             <div class="view">
-                <input class="toggle" type="checkbox" v-mode="todo.completed">
+                <input class="toggle" type="checkbox" v-model="todo.completed">
                 <label @dblclick="editTodo(todo)">[[ todo.title ]]</label>
                 <button class="destroy" @click="removeTodo(todo)"></button>
             </div>
-            <input type="edit" type="text"
+            <input class="edit" type="text"
                    v-model="todo.title"
                    v-todo-focus="todo == editedTodo"
                    @blur="doneEdit(todo)"
@@ -37,5 +37,5 @@
 
 {% block extra_script_footer %}
     {% load static %}
-    <script src="{% static 'js/script.js %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
 {% endblock %}

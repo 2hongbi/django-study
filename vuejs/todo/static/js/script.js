@@ -141,14 +141,13 @@ var app = new Vue({
             if (binding.value) {
                 el.focus()
             }
-
         }
     }
 })
 
 // handle routing
 function onHashChange () {
-    var visibility = window.location.has.replace(/#\/?/, '')
+    var visibility = window.location.hash.replace(/#\/?/, '')
     if (filters[visibility]) {
         app.visibility = visibility
     } else {
